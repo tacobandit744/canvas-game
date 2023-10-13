@@ -1,4 +1,3 @@
-
 import Canvas from './components/Canvas';
 
 function App(props: {width: number, height: number}) {
