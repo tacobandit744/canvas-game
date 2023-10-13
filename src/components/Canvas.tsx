@@ -14,6 +14,7 @@ const Canvas = ({ width, height }: CanvasProps) => {
             y:height/2, 
             size: 25, 
             speed: 7,
+            score: 0,
             movingLeft: false, 
             movingRight: false, 
             movingUp: false, 
@@ -26,20 +27,19 @@ const Canvas = ({ width, height }: CanvasProps) => {
         if (e.key === 'd') updatePlayer(oldPlayer => {return {...oldPlayer, movingRight: true}});
         if (e.key === 'w') updatePlayer(oldPlayer => {return {...oldPlayer, movingUp: true}});
         if (e.key === 's') updatePlayer(oldPlayer => {return {...oldPlayer, movingDown: true}});
-    }
+    };
 
     const handleKeyUp = (e: React.KeyboardEvent<HTMLCanvasElement>): void => {
         if (e.key === 'a') updatePlayer(oldPlayer => {return {...oldPlayer, movingLeft: false}});
         if (e.key === 'd') updatePlayer(oldPlayer => {return {...oldPlayer, movingRight: false}});
         if (e.key === 'w') updatePlayer(oldPlayer => {return {...oldPlayer, movingUp: false}});
         if (e.key === 's') updatePlayer(oldPlayer => {return {...oldPlayer, movingDown: false}});
-    }
+    };
 
     const playerUpdateLogic = (canvas: HTMLCanvasElement): void => {
         // Handle Player movement and boundary collisions
         if (player.movingLeft) {
             if (player.x - player.size > 0) {
-                console.log('meow')
                 if ((player.x - player.size) < player.speed) updatePlayer(oldPlayer => {return {...oldPlayer, x: oldPlayer.size}});
                 else updatePlayer(oldPlayer => {return {...oldPlayer, x: oldPlayer.x - player.speed}});
             }
@@ -62,14 +62,14 @@ const Canvas = ({ width, height }: CanvasProps) => {
                 else updatePlayer(oldPlayer => {return {...oldPlayer, y: oldPlayer.y + player.speed}});
             }      
         }
-    }
+    };
 
     const drawEntities = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D): void => {
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.beginPath();
         context.arc(player.x, player.y, player.size, 0, 2 * Math.PI);
-        context.fill(); 
-    }
+        context.fill();
+    };
 
     const gameLogic = () => {
         if (canvasRef.current) {
@@ -82,7 +82,7 @@ const Canvas = ({ width, height }: CanvasProps) => {
                 drawEntities(canvas, context);
             }
         }
-    }
+    };
 
     // Jank way of doing 60 FPS
     useEffect(() => {
@@ -91,6 +91,7 @@ const Canvas = ({ width, height }: CanvasProps) => {
         }, 17);
 
         return () => clearInterval(tick);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [gameLogic]);
 
 

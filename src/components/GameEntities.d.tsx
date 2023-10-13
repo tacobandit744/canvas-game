@@ -3,6 +3,7 @@ export type PlayerProps = {
     y: number;
     size: number;
     speed: number;
+    score: number;
     movingLeft: boolean;
     movingRight: boolean;
     movingUp: boolean;
@@ -15,4 +16,8 @@ export type WallProps = {
     width: number;
     height: number;
     hasCollision: boolean;
+}
+
+export type NPCProps = {
+
 }
