@@ -1,23 +1,28 @@
-export type PlayerProps = {
+type AttrProps = {
     x: number;
     y: number;
+    width: number;
+    height: number;
     size: number;
+    hasCollision: boolean;
+}
+
+type MovementProps = {
     speed: number;
-    score: number;
     movingLeft: boolean;
     movingRight: boolean;
     movingUp: boolean;
     movingDown: boolean;
 }
 
-export type WallProps = {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    hasCollision: boolean;
+export type PlayerProps = AttrProps & MovementProps & {
+    score: number;
 }
 
-export type NPCProps = {
+export type WallProps = AttrProps & {
+    isHostile: boolean;
+}
 
+export type NPCProps = AttrProps & MovementProps & {
+    isHostile: boolean;
 }
