@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect} from 'react';
-import {PlayerProps} from './GameEntities.d';
+import {NPCProps, PlayerProps} from './GameEntities.d';
 
 interface CanvasProps {
     width: number;
@@ -18,9 +18,25 @@ const Canvas = ({ width, height }: CanvasProps) => {
             movingLeft: false, 
             movingRight: false, 
             movingUp: false, 
-            movingDown: false
+            movingDown: false,
+            hasCollision: true
         }
     );
+    const [npc, updateNPC] = useState<NPCProps>(
+        {
+            x: 25,
+            y:25,
+            size: 10,
+            speed: 5,
+            movingLeft: false, 
+            movingRight: false, 
+            movingUp: false, 
+            movingDown: false,
+            hasCollision: true,
+            isHostile: true,
+            ai: () => {}
+        }
+    )
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLCanvasElement>): void => {
         if (e.key === 'a') updatePlayer(oldPlayer => {return {...oldPlayer, movingLeft: true}});

@@ -1,8 +1,8 @@
 type AttrProps = {
     x: number;
     y: number;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     size: number;
     hasCollision: boolean;
 }
@@ -20,9 +20,12 @@ export type PlayerProps = AttrProps & MovementProps & {
 }
 
 export type WallProps = AttrProps & {
+    width: number;
+    height: number;
     isHostile: boolean;
 }
 
 export type NPCProps = AttrProps & MovementProps & {
     isHostile: boolean;
+    ai: Function;
 }
